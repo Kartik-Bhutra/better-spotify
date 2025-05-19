@@ -1,12 +1,14 @@
 import React from "react";
 
-interface BoxProps{
-  children : React.ReactNode;
+interface BoxProps {
+  children: React.ReactNode;
   className?: string;
 }
 
-export default function Box({children, className} : BoxProps){
+export default function Box({ children, className }: BoxProps) {
   return (
-    <div className={`bg-neutral-900 rounded-lg h-fit w-full ${className}`}>{children}</div>
+    <div className={`bg-neutral-900 rounded-lg h-fit w-full ${className}`}>
+      {children}
+    </div>
   );
 }
