@@ -1,26 +1,32 @@
-import type { Metadata } from "next";
-import { Figtree } from "next/font/google";
-import "./globals.css";
+import Player from "@/components/Player";
 import Sidebar from "@/components/Sidebar";
+
+import getSongsByUserId from "@/actions/getSongsByUserId";
+
 import SupabaseProvider from "@/providers/SupabaseProvider";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToastProvider";
-import getSongsByUserId from "@/actions/getSongsByUserId";
+
+import "./globals.css";
+import { Figtree } from "next/font/google";
 
 const font = Figtree({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "Create Better Spotify",
-  description: "Developed by Kartik Bhutra",
+export const metadata = {
+  title: "Spotify Clone",
+  description: "Spotify Clone with Next.js, Supabase & TypeScript."
 };
 
+export const revalidate = 0;
+
 export default async function RootLayout({
-  children,
-}: Readonly<{
+  children
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   const userSongs = await getSongsByUserId();
+
   return (
     <html lang="en">
       <body className={font.className}>
@@ -29,6 +35,7 @@ export default async function RootLayout({
           <UserProvider>
             <ModalProvider />
             <Sidebar songs={userSongs}>{children}</Sidebar>
+            <Player />
           </UserProvider>
         </SupabaseProvider>
       </body>
