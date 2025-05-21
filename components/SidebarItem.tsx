@@ -10,7 +10,6 @@ interface SidebarItemProps {
 
 export default function SidebarItem({
   icon: Icon,
-  label,
   active,
   href,
 }: SidebarItemProps) {
